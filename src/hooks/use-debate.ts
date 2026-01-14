@@ -19,6 +19,19 @@ const INITIAL_STATE: DebateState = {
 export function useDebate() {
   const [state, setState] = useState<DebateState>(INITIAL_STATE);
 
+  // Save debate session to database
+  const saveSession = useCallback(async (debateState: DebateState) => {
+    try {
+      await fetch('/api/debate-sessions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(debateState),
+      });
+    } catch (error) {
+      console.error('Failed to save debate session:', error);
+    }
+  }, []);
+
   // Judge feedback is now manually triggered, not automatic
   const requestJudge = useCallback(async () => {
     if (!state.humanValue || !state.aiValue) return;
@@ -34,17 +47,23 @@ export function useDebate() {
         state.aiSide,
         state.frameworkStrategy
       );
-      setState(prev => ({
-        ...prev,
-        currentPhase: 'concluded',
+      
+      const updatedState = {
+        ...state,
+        currentPhase: 'concluded' as const,
         judgeFeedback: feedback,
         isLoading: false,
-      }));
+      };
+      
+      setState(updatedState);
+      
+      // Save the completed session
+      await saveSession(updatedState);
     } catch (error) {
       console.error('Error getting judge feedback:', error);
       setState(prev => ({ ...prev, isLoading: false }));
     }
-  }, [state.topic, state.arguments, state.humanValue, state.aiValue, state.humanSide, state.aiSide, state.frameworkStrategy]);
+  }, [state, saveSession]);
 
   const setTopic = useCallback((topic: string) => {
     setState(prev => ({
