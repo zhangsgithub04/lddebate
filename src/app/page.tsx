@@ -69,7 +69,10 @@ export default function Home() {
     <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <h1 className="text-lg font-bold">Douglas Debate</h1>
+          <div>
+            <h1 className="text-lg font-bold">SUNY IITG</h1>
+            <p className="text-xs text-muted-foreground">Douglas Debate Platform</p>
+          </div>
           <div className="flex gap-2">
             <Button
               variant={view === 'debate' ? 'default' : 'ghost'}

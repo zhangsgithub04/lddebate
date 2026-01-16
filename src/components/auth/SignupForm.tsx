@@ -53,6 +53,10 @@ export function SignupForm({ onSuccess, onSwitchToLogin }: SignupFormProps) {
 
   return (
     <div className="container max-w-md mx-auto p-6">
+      <div className="text-center mb-6">
+        <h1 className="text-3xl font-bold tracking-tight">SUNY IITG</h1>
+        <p className="text-sm text-muted-foreground">Douglas Debate Platform</p>
+      </div>
       <Card>
         <CardHeader>
           <CardTitle>Create Account</CardTitle>
