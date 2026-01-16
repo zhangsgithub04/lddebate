@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Douglas Debate Platform",
+  title: "Lincoln-Douglas Debate Platform",
   description: "Practice Lincoln-Douglas debate with AI",
 };
 

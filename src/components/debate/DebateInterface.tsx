@@ -369,7 +369,7 @@ export function DebateInterface({ state, onSubmitArgument, onRequestJudge, onRes
                     Thank you for participating in this debate!
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    The Douglas debate format helps structure constructive discourse.
+                    The Lincoln-Douglas debate format helps structure constructive discourse.
                     Review the arguments above and reflect on both perspectives.
                   </p>
                   <Button onClick={onReset} size="lg">
