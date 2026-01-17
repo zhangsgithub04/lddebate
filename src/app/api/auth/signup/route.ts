@@ -46,12 +46,16 @@ export async function POST(request: NextRequest) {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Check if email is admin email
+    const isAdmin = email.toLowerCase() === process.env.ADMIN_EMAIL?.toLowerCase();
+
     // Create user
     const newUser: User = {
       firstName,
       lastName,
       email: email.toLowerCase(),
       password: hashedPassword,
+      isAdmin,
       createdAt: new Date(),
     };
 
@@ -63,6 +67,7 @@ export async function POST(request: NextRequest) {
       email: newUser.email,
       firstName: newUser.firstName,
       lastName: newUser.lastName,
+      isAdmin: newUser.isAdmin,
     });
 
     // Set cookie

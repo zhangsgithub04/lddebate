@@ -10,6 +10,7 @@ export interface UserPayload {
   email: string;
   firstName: string;
   lastName: string;
+  isAdmin?: boolean;
 }
 
 export async function createToken(payload: UserPayload): Promise<string> {

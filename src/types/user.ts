@@ -4,6 +4,7 @@ export interface User {
   lastName: string;
   email: string;
   password: string; // hashed
+  isAdmin?: boolean;
   createdAt: Date;
 }
 

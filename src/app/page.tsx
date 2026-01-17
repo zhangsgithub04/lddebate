@@ -13,11 +13,12 @@ import { LoginForm } from '@/components/auth/LoginForm';
 import { SignupForm } from '@/components/auth/SignupForm';
 import { PastDebates } from '@/components/debate/PastDebates';
 import { SessionViewer } from '@/components/debate/SessionViewer';
+import { AdminDashboard } from '@/components/admin/AdminDashboard';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 import { DebateSession } from '@/types/user';
 
-type View = 'debate' | 'past-debates' | 'session-viewer';
+type View = 'debate' | 'past-debates' | 'session-viewer' | 'admin';
 type AuthView = 'login' | 'signup';
 
 export default function Home() {
@@ -91,6 +92,15 @@ export default function Home() {
             >
               Past Debates
             </Button>
+            {user.isAdmin && (
+              <Button
+                variant={view === 'admin' ? 'default' : 'ghost'}
+                size="sm"
+                onClick={() => setView('admin')}
+              >
+                Admin
+              </Button>
+            )}
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -104,6 +114,15 @@ export default function Home() {
       </div>
     </div>
   );
+
+  if (view === 'admin') {
+    return (
+      <>
+        <UserHeader />
+        <AdminDashboard onBack={() => setView('debate')} />
+      </>
+    );
+  }
 
   if (view === 'past-debates') {
     return (
